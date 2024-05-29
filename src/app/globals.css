@@ -2,32 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --default-700: 0deg 0% 24%;
+    --default-800: 216deg 28% 14%;
+    --default-900: 216deg 28% 7%;
+    --default: 216deg 43% 4%;
+
+    --foreground: 216deg 4% 83%;
+    --foreground-light: 0deg 0% 100%;
+    --foreground-dark: 216deg 4% 60%;
+
+    --primary: 216deg 93% 53%;
+    --primary-light: 216deg 93% 46%;
+
+    --danger: 0deg 100% 47%;
+    --danger-light: 0deg 100% 43%;
+
+    --success: 136deg 74% 33%;
+    --success-light: 136deg 67% 41%;
+
+    --border: 216deg 20% 20%;
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
+  * {
+    @apply text-foreground;
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  body {
+    @apply min-h-screen;
+  }
+
+  h1 {
+    @apply text-5xl font-semibold text-foreground-light mb-2;
+  }
+
+  h2 {
+    @apply text-3xl font-semibold text-foreground-light mb-1.5;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold text-foreground-light mb-1.5;
+  }
+
+  @layer utilities {
+    .link {
+      @apply text-primary hover:underline;
+    }
   }
 }
