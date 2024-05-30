@@ -10,7 +10,7 @@ export const ProjectListItem: React.FC<ProjectListItemProps> = ({ item }) => {
   return (
     <div
       key={item.id}
-      className="border-t border-border last:border-b p-4 flex justify-between gap-4 items-center"
+      className="bg-default-800 rounded-md p-4 flex justify-between gap-4 items-center"
     >
       <div>
         <div className="flex items-center gap-3 mb-2">

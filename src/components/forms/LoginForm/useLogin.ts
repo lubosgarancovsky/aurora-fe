@@ -1,6 +1,5 @@
 "use client";
 
-import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -10,13 +9,13 @@ export const useLoginForm = () => {
   const router = useRouter();
 
   const login = async (formData: FormData) => {
+    if (error) setError(false);
+
     const response = await signIn("credentials", {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
       redirect: false
     });
-
-    console.log(response);
 
     if (!response?.error) {
       return router.push("/");

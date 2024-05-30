@@ -55,7 +55,7 @@ export const ProjectList: React.FC<ProjectListProps> = ({}) => {
       {status === "pending" && <p>Loading...</p>}
       {status === "error" && <p>Error</p>}
       {status === "success" && (
-        <div>
+        <div className="flex flex-col gap-1.5">
           {data.data.items.map((item) => (
             <ProjectListItem key={item.id} item={item} />
           ))}

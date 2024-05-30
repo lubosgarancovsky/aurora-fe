@@ -1,9 +1,9 @@
-import React from "react";
-import { PublicUser } from "@/utils/api/dto/user";
+import React, { HTMLAttributes } from "react";
 import { foregroundFor } from "@/utils/luminance";
 import { cn } from "@/utils";
+import { PublicUser } from "@/utils/api/dto/user";
 
-interface AvatarProps {
+interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
   user: PublicUser;
   showName?: boolean;
   showEmail?: boolean;
@@ -11,8 +11,11 @@ interface AvatarProps {
 
 export const Avatar: React.FC<AvatarProps> = ({
   user,
+  className,
+  style,
   showName = false,
-  showEmail = false
+  showEmail = false,
+  ...props
 }) => {
   const initials = () => {
     const [firstName, lastName] = user.name.split(" ");
@@ -24,10 +27,15 @@ export const Avatar: React.FC<AvatarProps> = ({
   return (
     <Wrapper className="flex gap-3 items-center">
       <div
-        className="rounded-full w-9 h-9 flex justify-center items-center overflow-hidden"
+        className={cn(
+          "rounded-full w-9 h-9 flex justify-center items-center overflow-hidden",
+          className
+        )}
         style={{
-          backgroundColor: user.color
+          backgroundColor: user.color,
+          ...style
         }}
+        {...props}
       >
         {user.picture ? (
           <img width={48} height={48} src={user.picture} alt={user.name} />

@@ -27,7 +27,7 @@ export const Button = React.forwardRef<any, ButtonProps>(
     ref
   ) => {
     const classes = cn(
-      "bg-primary px-3 py-1 rounded-md text-foreground-light w-fit flex gap-1.5 items-center justify-center",
+      "bg-primary px-3 py-1 rounded-md text-foreground-light w-fit flex gap-1.5 items-center justify-center duration-200",
       {
         "w-full": fullWidth,
         "bg-primary hover:bg-primary-light":
@@ -38,6 +38,8 @@ export const Button = React.forwardRef<any, ButtonProps>(
           variant === "solid" && color === "success",
         "border border-border text-foreground bg-neutral hover:bg-neutral-800 text-foreground-dark":
           variant === "outline",
+        "text-danger hover:text-foreground-light hover:bg-danger":
+          color === "danger" && variant === "outline",
         "p-1.5": iconOnly
       },
       className

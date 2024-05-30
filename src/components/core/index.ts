@@ -4,5 +4,7 @@ export * from "./Button";
 export * from "./Chip";
 export * from "./Drawer";
 export * from "./Divider";
+export * from "./Dialog";
 export * from "./Input";
 export * from "./PairsList";
+export * from "./VerticalNavigation";

@@ -1,3 +1,5 @@
+import { Board, Team } from "@/components";
+
 interface ProjectDetailPageProps {
   params: { id: string };
 }
@@ -5,5 +7,10 @@ interface ProjectDetailPageProps {
 export default function ProjectDetailPage({
   params: { id }
 }: ProjectDetailPageProps) {
-  return <div>{id}</div>;
+  return (
+    <main className="p-8">
+      <Team projectId={id} />
+      <Board projectId={id} />
+    </main>
+  );
 }

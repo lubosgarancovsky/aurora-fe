@@ -23,16 +23,25 @@ import {
   TeamIcon
 } from "@/components/icons";
 
-interface HeaderProps {}
+const NavigationLink = ({ children, href }) => (
+  <a href={href} className="p-2 hover:bg-default-800 rounded-md">
+    {children}
+  </a>
+);
 
-export const Header: React.FC<HeaderProps> = ({}) => {
+export const Header: React.FC = () => {
   const { data } = useSession();
 
   const user = publicUser(data?.user);
 
   return (
     <header className="p-4 bg-default flex justify-between border-b border-border">
-      <span>Aurora</span>
+      <div className="flex items-center gap-3">
+        <NavigationLink href="/">Dashboard</NavigationLink>
+        <NavigationLink href="/projects">Projects</NavigationLink>
+        <NavigationLink href="#">My work</NavigationLink>
+        <NavigationLink href="#">Teams</NavigationLink>
+      </div>
       <div className="flex items-center gap-2">
         <Button
           startContent={<PlusIcon />}

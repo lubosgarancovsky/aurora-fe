@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --default-700: 0deg 0% 24%;
+    --default-700: 216deg 28% 24%;
     --default-800: 216deg 28% 14%;
     --default-900: 216deg 28% 7%;
     --default: 216deg 43% 4%;
@@ -16,8 +16,8 @@
     --primary: 216deg 93% 53%;
     --primary-light: 216deg 93% 46%;
 
-    --danger: 0deg 100% 47%;
-    --danger-light: 0deg 100% 43%;
+    --danger: 360deg 97% 61%;
+    --danger-light: 360deg 97% 66%;
 
     --success: 136deg 74% 33%;
     --success-light: 136deg 67% 41%;
@@ -43,6 +43,10 @@
 
   h3 {
     @apply text-2xl font-semibold text-foreground-light mb-1.5;
+  }
+
+  h4 {
+    @apply text-xl text-foreground-light;
   }
 
   @layer utilities {

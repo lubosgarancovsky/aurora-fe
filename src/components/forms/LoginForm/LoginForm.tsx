@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Button, Input } from "../core";
+import { Button, Input } from "../../core";
 import { useLoginForm } from "./useLogin";
 
 interface LoginFormProps {}
@@ -18,6 +18,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({}) => {
         id="email-input"
         label="E-mail address"
         name="email"
+        error={error}
+        errorMsg="Entered credentials are invalid."
         required
         fullWidth
         // quick login
