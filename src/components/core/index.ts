@@ -8,3 +8,4 @@ export * from "./Dialog";
 export * from "./Input";
 export * from "./PairsList";
 export * from "./VerticalNavigation";
+export * from "./TabNavigation";
