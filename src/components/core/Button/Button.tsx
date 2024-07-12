@@ -27,7 +27,7 @@ export const Button = React.forwardRef<any, ButtonProps>(
     ref
   ) => {
     const classes = cn(
-      "bg-primary px-3 py-1 rounded-md text-foreground-light w-fit flex gap-1.5 items-center justify-center duration-200",
+      "bg-primary px-3 py-1 rounded-md text-foreground-light w-fit flex gap-1.5 items-center justify-center duration-200 h-fit",
       {
         "w-full": fullWidth,
         "bg-primary hover:bg-primary-light":

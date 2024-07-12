@@ -9,3 +9,5 @@ export * from "./Input";
 export * from "./PairsList";
 export * from "./VerticalNavigation";
 export * from "./TabNavigation";
+export * from "./TextArea";
+export * from "./Select";

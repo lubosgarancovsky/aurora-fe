@@ -1,0 +1,1 @@
+export { BoardStructureDialog } from "./BoardStructureDialog";

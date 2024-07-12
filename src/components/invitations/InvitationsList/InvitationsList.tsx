@@ -109,7 +109,7 @@ export const InvitationsList: React.FC<InvitationsListProps> = ({
   });
 
   return (
-    <div className="w-full">
+    <div className="w-full flex flex-col gap-3">
       {status === "success" && (
         <>
           {data.data.items.length ? (

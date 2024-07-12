@@ -1,12 +1,14 @@
 import React, { HTMLAttributes } from "react";
 import { foregroundFor } from "@/utils/luminance";
-import { cn } from "@/utils";
 import { PublicUser } from "@/utils/api/dto/user";
+import { cn } from "@/utils";
+import { PersonIcon } from "@/components/icons";
 
 interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
-  user: PublicUser;
+  user: PublicUser | null;
   showName?: boolean;
   showEmail?: boolean;
+  small?: boolean;
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
@@ -15,37 +17,55 @@ export const Avatar: React.FC<AvatarProps> = ({
   style,
   showName = false,
   showEmail = false,
+  small = false,
   ...props
 }) => {
   const initials = () => {
-    const [firstName, lastName] = user.name.split(" ");
-    return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+    if (user) {
+      const [firstName, lastName] = user.name.split(" ");
+      return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase();
+    }
+
+    return "";
   };
 
+  const foregroundClass = user ? foregroundFor(user.color) : "text-white";
   const Wrapper = showName || showEmail ? "div" : React.Fragment;
 
   return (
     <Wrapper className="flex gap-3 items-center">
       <div
         className={cn(
-          "rounded-full w-9 h-9 flex justify-center items-center overflow-hidden",
+          "rounded-full flex justify-center items-center overflow-hidden",
+          { "w-7 h-7": small },
+          { "w-9 h-9": !small },
           className
         )}
         style={{
-          backgroundColor: user.color,
+          backgroundColor: user?.color || "#dedede",
           ...style
         }}
         {...props}
       >
-        {user.picture ? (
+        {user?.picture ? (
           <img width={48} height={48} src={user.picture} alt={user.name} />
         ) : (
-          <span className={cn(foregroundFor(user.color), "font-semibold")}>
-            {initials()}
+          <span
+            className={cn(foregroundClass, "font-semibold", {
+              "text-sm": small
+            })}
+          >
+            {!user ? (
+              <PersonIcon
+                className={cn("w-6 h-6 stroke-black", { "w-5 h-5": small })}
+              />
+            ) : (
+              initials()
+            )}
           </span>
         )}
       </div>
-      {(showName || showEmail) && (
+      {user && (showName || showEmail) && (
         <div className="flex flex-col text-left">
           {showName && <span className="leading-none">{user.name}</span>}
           {showEmail && (

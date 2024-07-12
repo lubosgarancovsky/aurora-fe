@@ -4,12 +4,11 @@ import { Avatar } from "@/components/core";
 import { useTeam } from "./useTeam";
 import { NoTeam } from "./NoTeam";
 import { InvitationDialog } from "./InvitationDialog";
+import { useProjectDetail } from "@/context";
+import { PublicUser } from "@/utils/api/dto/user";
 
-interface TeamProps {
-  projectId: string;
-}
-
-export const Team: React.FC<TeamProps> = ({ projectId }) => {
+export const Team: React.FC = () => {
+  const { projectId } = useProjectDetail();
   const { team, users } = useTeam(projectId);
 
   return (
@@ -17,8 +16,8 @@ export const Team: React.FC<TeamProps> = ({ projectId }) => {
       <h3>Team</h3>
       <div className="flex gap-2">
         {team.status === "success" &&
-          team.data?.data.members.map((item) => (
-            <button key={item.id}>
+          team.data?.members.map((item: PublicUser) => (
+            <button key={item.id} onClick={() => {}}>
               <Avatar user={item} />
             </button>
           ))}

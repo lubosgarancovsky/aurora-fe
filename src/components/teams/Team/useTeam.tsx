@@ -3,16 +3,19 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { Team as TeamDto } from "@/utils/api/dto/teams";
 import { PublicUser } from "@/utils/api/dto/user";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { Page } from "@/utils/api/dto/page";
+import { useSession } from "next-auth/react";
 
 export const useTeam = (projectId: string) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const queryClient = useQueryClient();
 
+  const { data: session } = useSession();
+
   const { data, status } = useQuery<AxiosResponse<TeamDto>>({
     queryKey: ["team"],
-    queryFn: () => ApiClient.get(`/v1/projects/${projectId}/teams`)
+    queryFn: () => ApiClient.get(`/v1/projects/${projectId}/teams`, {})
   });
 
   const { data: users, refetch } = useQuery<AxiosResponse<Page<PublicUser>>>({
@@ -41,9 +44,31 @@ export const useTeam = (projectId: string) => {
       })
   });
 
+  const team = useMemo(() => {
+    const user = session?.user;
+    const teamData = data?.data;
+    if (status === "success" && teamData && user) {
+      const membersArr = teamData.members.filter(
+        (member) => member.id !== user.id
+      );
+
+      const publicUser = {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        picture: user.picture || null,
+        color: user.color
+      };
+
+      return { ...teamData, members: [publicUser, ...membersArr] };
+    }
+
+    return null;
+  }, [data, status]);
+
   return {
     team: {
-      data,
+      data: team,
       status,
       create
     },

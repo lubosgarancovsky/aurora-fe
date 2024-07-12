@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    --default-600: 215deg 25% 39%;
     --default-700: 216deg 28% 24%;
     --default-800: 216deg 28% 14%;
     --default-900: 216deg 28% 7%;

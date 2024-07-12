@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { DialogProps } from "./Dialog";
 
 export const DialogContext = createContext<any>(null);
 
@@ -12,11 +13,19 @@ export const useDialogContext = () => {
   return ctx;
 };
 
-export const DialogProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isOpen, setIsOpen] = useState(false);
+export const DialogProvider: React.FC<DialogProps> = ({
+  children,
+  isOpen: isOpenProp,
+  onClose
+}) => {
+  const [isOpen, setIsOpen] = useState(!!isOpenProp);
+
+  useEffect(() => {
+    setIsOpen(!!isOpenProp);
+  }, [isOpenProp]);
 
   return (
-    <DialogContext.Provider value={{ isOpen, setIsOpen }}>
+    <DialogContext.Provider value={{ isOpen, setIsOpen, onClose }}>
       {children}
     </DialogContext.Provider>
   );
