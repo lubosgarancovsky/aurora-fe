@@ -31,7 +31,7 @@ export const DialogBody = ({ children }: { children: React.ReactNode }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed left-0 top-0 w-screen h-screen bg-black/60 backdrop-blur-sm grid place-items-center"
+          className="fixed left-0 top-0 w-screen h-screen bg-black/60 backdrop-blur-sm grid place-items-center z-50"
         >
           <motion.div
             initial={{ opacity: 0, y: "20%" }}
