@@ -9,12 +9,17 @@ import {
   Select,
   TextArea
 } from "@/components/core";
+import { useTeam } from "@/components/teams/Team/useTeam";
+import { useProjectDetail } from "@/context";
 
 interface NewStoryDialogProps {
   children: React.ReactElement;
 }
 
 export const NewStoryDialog: React.FC<NewStoryDialogProps> = ({ children }) => {
+  const { projectId } = useProjectDetail();
+  const { team } = useTeam(projectId);
+
   return (
     <Dialog>
       <DialogTrigger>{children}</DialogTrigger>
@@ -30,8 +35,13 @@ export const NewStoryDialog: React.FC<NewStoryDialogProps> = ({ children }) => {
             <option>Bug</option>
           </Select>
           <Select label="Assign to" name="type">
-            <option>Story</option>
-            <option>Bug</option>
+            <option>Unassigned</option>
+            {team.status === "success" &&
+              team.data?.members.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
           </Select>
           <Button type="submit" className="ml-auto">
             Create

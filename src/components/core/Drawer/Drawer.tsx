@@ -41,7 +41,7 @@ export const DrawerBody: React.FC<DrawerBodyProps> = ({ children, header }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="bg-black/60 w-screen h-screen overflow-hidden fixed top-0 left-0 flex justify-end"
+          className="bg-black/60 w-screen h-screen overflow-hidden fixed top-0 left-0 flex justify-end z-50"
         >
           <motion.div
             initial={{ x: "100%" }}

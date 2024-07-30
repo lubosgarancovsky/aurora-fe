@@ -84,7 +84,7 @@ export const ListOfStories: React.FC<ListOfStoriesProps> = ({
                   "bg-green-500/50 border-green-400": state.code === "done"
                 }
               )}
-            ></div>
+            />
           ))}
         </div>
       )}
